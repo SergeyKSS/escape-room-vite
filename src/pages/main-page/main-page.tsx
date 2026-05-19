@@ -1,4 +1,4 @@
-import FilterList from './filter-list';
+import FilterTopic from './filter-topic';
 
 function MainPage(): JSX.Element {
   return (
@@ -16,7 +16,7 @@ function MainPage(): JSX.Element {
           <form className="filter" action="#" method="get">
             <fieldset className="filter__section">
               <legend className="visually-hidden">Тематика</legend>
-              <FilterList />
+              <FilterTopic />
             </fieldset>
             <fieldset className="filter__section">
               <legend className="visually-hidden">Сложность</legend>

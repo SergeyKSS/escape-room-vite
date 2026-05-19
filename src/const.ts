@@ -77,3 +77,22 @@ export const FilterData = [
     title: 'Sci-fi',
   },
 ] as const;
+
+export const DifficultyData = [
+  {
+    id: 'any',
+    title: 'Любой',
+  },
+  {
+    id: 'easy',
+    title: 'Лёгкий',
+  },
+  {
+    id: 'middle',
+    title: 'Средний',
+  },
+  {
+    id: 'hard',
+    title: 'Сложный',
+  }
+] as const;

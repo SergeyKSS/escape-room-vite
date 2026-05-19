@@ -1,16 +1,16 @@
-import FilterItem from './filter-item';
+import TopicItem from './topic-item';
 import { FilterData } from '../../const';
 import { useState } from 'react';
 
 type FilterId = (typeof FilterData)[number]['id'];
 
-function FilterList(): JSX.Element {
+function FilterTopic(): JSX.Element {
   const [activeFilter, setActiveFilter] = useState<FilterId>('all');
 
   return (
     <ul className="filter__list">
       {FilterData.map((item) => (
-        <FilterItem
+        <TopicItem
           key={item.id}
           id={item.id}
           width={item.width}
@@ -25,4 +25,4 @@ function FilterList(): JSX.Element {
   );
 }
 
-export default FilterList;
+export default FilterTopic;

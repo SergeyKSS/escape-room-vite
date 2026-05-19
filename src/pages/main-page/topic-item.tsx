@@ -10,7 +10,7 @@ type FilterItemProps = {
   onFilterChange: (id: (typeof FilterData)[number]['id']) => void;
 };
 
-function FilterItem({
+function TopicItem({
   id,
   width,
   height,
@@ -42,4 +42,4 @@ function FilterItem({
   );
 }
 
-export default FilterItem;
+export default TopicItem;
