@@ -32,3 +32,48 @@ export const Socials = [
     interactiveIcon: '#icon-vk-interactive',
   },
 ] as const;
+
+export const FilterData = [
+  {
+    id: 'all',
+    width: '26',
+    height: '30',
+    href: '#icon-all-quests',
+    title: 'Все квесты',
+  },
+  {
+    id: 'adventure',
+    width: '36',
+    height: '30',
+    href: '#icon-adventure',
+    title: 'Приключения',
+  },
+  {
+    id: 'horror',
+    width: '30',
+    height: '30',
+    href: '#icon-horror',
+    title: 'Ужасы',
+  },
+  {
+    id: 'mystic',
+    width: '30',
+    height: '30',
+    href: '#icon-mystic',
+    title: 'Мистика',
+  },
+  {
+    id: 'detective',
+    width: '40',
+    height: '30',
+    href: '#icon-detective',
+    title: 'Детектив',
+  },
+  {
+    id: 'sciFi',
+    width: '28',
+    height: '30',
+    href: '#icon-sci-fi',
+    title: 'Sci-fi',
+  },
+] as const;
