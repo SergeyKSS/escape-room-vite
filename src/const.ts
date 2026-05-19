@@ -19,3 +19,16 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export const Socials = [
+  {
+    name: 'Skype',
+    defaultIcon: '#icon-skype-default',
+    interactiveIcon: '#icon-skype-interactive',
+  },
+  {
+    name: 'ВКонтакте',
+    defaultIcon: '#icon-vk-default',
+    interactiveIcon: '#icon-vk-interactive',
+  },
+] as const;
