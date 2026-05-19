@@ -1,4 +1,4 @@
-import { FilterData } from '../../const';
+import { FilterData } from '../../../const';
 
 type FilterItemProps = {
   id: (typeof FilterData)[number]['id'];

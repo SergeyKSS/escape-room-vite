@@ -2,14 +2,14 @@ export const AppRoute = {
   Root: '/',
   Login: '/login',
   Contacts: '/contacts',
-  Quests: '/quests',
+  MyQuests: '/quests',
   Quest: '/quest/:id',
   Booking: '/booking',
   NotFound: '/not-found',
 } as const;
 
 export const NavItems = [
-  { label: 'Квесты', to: AppRoute.Quests },
+  { label: 'Квесты', to: AppRoute.MyQuests },
   { label: 'Контакты', to: AppRoute.Contacts },
   { label: 'Мои бронирования', to: AppRoute.Booking },
 ] as const;
@@ -96,3 +96,17 @@ export const DifficultyData = [
     title: 'Сложный',
   }
 ] as const;
+
+export const DifficultyTitle = {
+  hard: 'сложный',
+  medium: 'средний',
+  easy: 'лёгкий',
+} as const;
+
+export const QuestTypeTitle = {
+  adventures: 'приключения',
+  horror: 'ужасы',
+  mystic: 'мистика',
+  detective: 'детектив',
+  'sci-fi': 'sci-fi',
+} as const;

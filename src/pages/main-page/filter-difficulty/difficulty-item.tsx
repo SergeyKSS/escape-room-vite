@@ -1,4 +1,4 @@
-import { DifficultyData } from '../../const';
+import { DifficultyData } from '../../../const';
 
 type DifficultyItemProps = {
   id: (typeof DifficultyData)[number]['id'];

@@ -1,5 +1,5 @@
 import TopicItem from './topic-item';
-import { FilterData } from '../../const';
+import { FilterData } from '../../../const';
 import { useState } from 'react';
 
 type FilterId = (typeof FilterData)[number]['id'];

@@ -1,5 +1,5 @@
 import DifficultyItem from './difficulty-item';
-import { DifficultyData } from '../../const';
+import { DifficultyData } from '../../../const';
 import { useState } from 'react';
 
 type DifficultyId = (typeof DifficultyData)[number]['id'];
