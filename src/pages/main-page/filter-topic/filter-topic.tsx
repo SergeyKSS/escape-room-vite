@@ -1,12 +1,12 @@
 import TopicItem from './topic-item';
 import { FilterData } from '../../../const';
-import { useState } from 'react';
 
-type FilterId = (typeof FilterData)[number]['id'];
+type FilterTopicProps = {
+  activeFilter: (typeof FilterData)[number]['id'];
+  onFilterChange: (id: (typeof FilterData)[number]['id']) => void;
+}
 
-function FilterTopic(): JSX.Element {
-  const [activeFilter, setActiveFilter] = useState<FilterId>('all');
-
+function FilterTopic({activeFilter, onFilterChange}: FilterTopicProps): JSX.Element {
   return (
     <ul className="filter__list">
       {FilterData.map((item) => (
@@ -18,7 +18,7 @@ function FilterTopic(): JSX.Element {
           href={item.href}
           title={item.title}
           activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
+          onFilterChange={onFilterChange}
         />
       ))}
     </ul>

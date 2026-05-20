@@ -1,11 +1,14 @@
 import DifficultyItem from './difficulty-item';
 import { DifficultyData } from '../../../const';
-import { useState } from 'react';
 
 type DifficultyId = (typeof DifficultyData)[number]['id'];
 
-function FilterDifficulty(): JSX.Element {
-  const [activeFilter, setActiveFilter] = useState<DifficultyId>('any');
+type FilterDifficultyProps = {
+  activeDifficulty: DifficultyId;
+  onDifficultyChange: (id: DifficultyId) => void;
+};
+
+function FilterDifficulty({activeDifficulty, onDifficultyChange}: FilterDifficultyProps): JSX.Element {
 
   return (
     <ul className="filter__list">
@@ -14,8 +17,8 @@ function FilterDifficulty(): JSX.Element {
           key={item.id}
           id={item.id}
           title={item.title}
-          activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
+          activeFilter={activeDifficulty}
+          onFilterChange={onDifficultyChange}
         />
       ))}
     </ul>

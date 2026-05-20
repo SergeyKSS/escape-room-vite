@@ -110,3 +110,12 @@ export const QuestTypeTitle = {
   detective: 'детектив',
   'sci-fi': 'sci-fi',
 } as const;
+
+export const TIMEOUT_SHOW_ERROR = 2000;
+
+export enum APIRoute {
+  Quests = '/quest',
+  Reservation = '/reservation',
+  Login = '/login',
+  Logout = '/logout',
+}
