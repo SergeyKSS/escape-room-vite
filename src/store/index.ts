@@ -3,11 +3,13 @@ import { createAPI } from '../services/api';
 import { questsReducer } from './quests/quests-slice';
 import { errorReducer } from './error/error.slice';
 import { userReducer } from './user/user.slice';
+import { detailedQuestReducer } from './detailed-quest/detailed-quest';
 
 export const rootReducer = combineReducers({
   quests: questsReducer,
   error: errorReducer,
   user: userReducer,
+  detailedQuest: detailedQuestReducer,
 });
 
 export const api = createAPI();

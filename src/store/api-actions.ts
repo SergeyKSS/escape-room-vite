@@ -6,6 +6,7 @@ import { APIRoute } from '../const';
 import { AuthInfo } from '../types/auth-info';
 import { UserData } from '../types/user-data';
 import { saveToken, dropToken } from '../services/token';
+import { DetailedQuest } from '../types/detailed-quest';
 
 export const fetchQuestsAction = createAsyncThunk<Card[], undefined, {
   dispatch: AppDispatch;
@@ -74,4 +75,21 @@ export const logoutAction = createAsyncThunk<void, undefined, {
       return rejectWithValue('Failded to logout, try one more time');
     }
   },
+);
+
+export const fetchQuestByIdAction = createAsyncThunk<DetailedQuest, string, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+  rejectValue: string;
+}>(
+  'quest/fetchById',
+  async (questId, {extra: api, rejectWithValue}) => {
+    try {
+      const {data} = await api.get<DetailedQuest>(`${APIRoute.Quests}/${questId}`);
+      return data;
+    } catch {
+      return rejectWithValue('Failed to load quest');
+    }
+  }
 );

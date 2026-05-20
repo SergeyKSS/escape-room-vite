@@ -4,7 +4,7 @@ export const AppRoute = {
   Contacts: '/contacts',
   MyQuests: '/quests',
   Quest: '/quest/:id',
-  Booking: '/booking',
+  Booking: '/quest/:id/booking',
   NotFound: '/not-found',
 } as const;
 
