@@ -7,6 +7,8 @@ import { AuthInfo } from '../types/auth-info';
 import { UserData } from '../types/user-data';
 import { saveToken, dropToken } from '../services/token';
 import { DetailedQuest } from '../types/detailed-quest';
+import { Booking } from '../types/booking';
+import { ResponseBooking, PostQuestBookingArg } from '../types/booking-data';
 
 export const fetchQuestsAction = createAsyncThunk<Card[], undefined, {
   dispatch: AppDispatch;
@@ -90,6 +92,40 @@ export const fetchQuestByIdAction = createAsyncThunk<DetailedQuest, string, {
       return data;
     } catch {
       return rejectWithValue('Failed to load quest');
+    }
+  }
+);
+
+export const fetchQuestBookingAction = createAsyncThunk<Booking[], string, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+  rejectValue: string;
+}>(
+  'quest/fetchBooking',
+  async (questId, {extra: api, rejectWithValue}) => {
+    try {
+      const {data} = await api.get<Booking[]>(`${APIRoute.Quests}/${questId}/booking`);
+      return data;
+    } catch {
+      return rejectWithValue('Failed to get booking information of the quest');
+    }
+  }
+);
+
+export const postQuestBookingAction = createAsyncThunk<ResponseBooking, PostQuestBookingArg, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+  rejectValue: string;
+}>(
+  'quest/postBooking',
+  async ({questId, bookingData}, {extra: api, rejectWithValue}) => {
+    try {
+      const {data} = await api.post<ResponseBooking>(`${APIRoute.Quests}/${questId}/booking`, bookingData);
+      return data;
+    } catch {
+      return rejectWithValue('Failed to post booking of the quest');
     }
   }
 );

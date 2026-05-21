@@ -1,4 +1,4 @@
-import { setError } from '../store/error/error.slice';
+import { setError } from '../store/error/error-slice';
 import { AppDispatch } from '../types/state';
 import { TIMEOUT_SHOW_ERROR } from '../const';
 

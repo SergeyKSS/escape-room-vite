@@ -1,15 +1,17 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { createAPI } from '../services/api';
 import { questsReducer } from './quests/quests-slice';
-import { errorReducer } from './error/error.slice';
-import { userReducer } from './user/user.slice';
-import { detailedQuestReducer } from './detailed-quest/detailed-quest';
+import { errorReducer } from './error/error-slice';
+import { userReducer } from './user/user-slice';
+import { detailedQuestReducer } from './detailed-quest/detailed-quest-slice';
+import { bookingInfoSliceReducer } from './booking-info/booking-info-slice';
 
 export const rootReducer = combineReducers({
   quests: questsReducer,
   error: errorReducer,
   user: userReducer,
   detailedQuest: detailedQuestReducer,
+  bookingInfo: bookingInfoSliceReducer,
 });
 
 export const api = createAPI();
