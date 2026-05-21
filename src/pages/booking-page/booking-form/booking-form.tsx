@@ -1,105 +1,56 @@
 import FormDateSection from './form-date-section';
-import { useState } from 'react';
 import { Slot } from '../../../types/form-slot';
+import FormContacts from './form-contacts';
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
+import { BookingFormData } from '../../../types/booking-data';
 
 type BookingFormProps = {
-  slots: Slot[];
+  todaySlots: Slot[];
+  tomorrowSlots: Slot[];
+  register: UseFormRegister<BookingFormData>;
+  errors: FieldErrors<BookingFormData>;
+  onSubmit: (evt: React.FormEvent<HTMLFormElement>) => void;
+  minPeople: number;
+  maxPeople: number;
 };
 
-function BookingForm({slots}: BookingFormProps): JSX.Element {
-  const [selectedSlotId, setSelectedSlotId] = useState<string>('');
-
+function BookingForm({
+  todaySlots,
+  tomorrowSlots,
+  register,
+  errors,
+  onSubmit,
+  minPeople,
+  maxPeople,
+}: BookingFormProps): JSX.Element {
   return (
     <form
       className="booking-form"
-      action="https://echo.htmlacademy.ru/"
-      method="post"
+      onSubmit={onSubmit}
     >
       <fieldset className="booking-form__section">
         <legend className="visually-hidden">Выбор даты и времени</legend>
 
-        <FormDateSection slots={slots} day={'Сегодня'} selectedSlotId={selectedSlotId} setSelectedSlotId={setSelectedSlotId}/>
-        <FormDateSection slots={slots} day={'Завтра'} selectedSlotId={selectedSlotId} setSelectedSlotId={setSelectedSlotId}/>
-
-      </fieldset>
-      <fieldset className="booking-form__section">
-        <legend className="visually-hidden">Контактная информация</legend>
-        <div className="custom-input booking-form__input">
-          <label className="custom-input__label" htmlFor="name">
-            Ваше имя
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Имя"
-            required
-            pattern="[А-Яа-яЁёA-Za-z'- ]{1,}"
-          />
-        </div>
-        <div className="custom-input booking-form__input">
-          <label className="custom-input__label" htmlFor="tel">
-            Контактный телефон
-          </label>
-          <input
-            type="tel"
-            id="tel"
-            name="tel"
-            placeholder="Телефон"
-            required
-            pattern="[0-9]{10,}"
-          />
-        </div>
-        <div className="custom-input booking-form__input">
-          <label className="custom-input__label" htmlFor="person">
-            Количество участников
-          </label>
-          <input
-            type="number"
-            id="person"
-            name="person"
-            placeholder="Количество участников"
-            required
-          />
-        </div>
-        <label className="custom-checkbox booking-form__checkbox booking-form__checkbox--children">
-          <input type="checkbox" id="children" name="children" defaultChecked />
-          <span className="custom-checkbox__icon">
-            <svg width={20} height={17} aria-hidden="true">
-              <use xlinkHref="#icon-tick" />
-            </svg>
-          </span>
-          <span className="custom-checkbox__label">
-            Со&nbsp;мной будут дети
-          </span>
-        </label>
-      </fieldset>
-      <button
-        className="btn btn--accent btn--cta booking-form__submit"
-        type="submit"
-      >
-        Забронировать
-      </button>
-      <label className="custom-checkbox booking-form__checkbox booking-form__checkbox--agreement">
-        <input
-          type="checkbox"
-          id="id-order-agreement"
-          name="user-agreement"
-          required
+        <FormDateSection
+          slots={todaySlots}
+          day={'Сегодня'}
+          register={register}
         />
-        <span className="custom-checkbox__icon">
-          <svg width={20} height={17} aria-hidden="true">
-            <use xlinkHref="#icon-tick" />
-          </svg>
-        </span>
-        <span className="custom-checkbox__label">
-          Я&nbsp;согласен с
-          <a className="link link--active-silver link--underlined" href="#">
-            правилами обработки персональных данных
-          </a>
-          &nbsp;и пользовательским соглашением
-        </span>
-      </label>
+
+        <FormDateSection
+          slots={tomorrowSlots}
+          day={'Завтра'}
+          register={register}
+        />
+        {errors.slotId && <span>{errors.slotId.message}</span>}
+      </fieldset>
+
+      <FormContacts
+        register={register}
+        errors={errors}
+        minPeople={minPeople}
+        maxPeople={maxPeople}
+      />
     </form>
   );
 }

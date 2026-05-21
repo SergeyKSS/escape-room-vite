@@ -1,16 +1,16 @@
 import FormSlot from './form-slot';
-import { dayValue } from '../../../utils/utils';
-import { formatSlotId } from '../../../utils/utils';
+import { dayValue, formatSlotId } from '../../../utils/utils';
 import { Slot } from '../../../types/form-slot';
+import { BookingFormData } from '../../../types/booking-data';
+import { UseFormRegister } from 'react-hook-form';
 
 type FormDateSectionProps = {
   slots: Slot[];
   day: 'Сегодня' | 'Завтра';
-  selectedSlotId: string;
-  setSelectedSlotId: (slotId: string) => void;
+  register: UseFormRegister<BookingFormData>;
 };
 
-function FormDateSection({ slots, day, selectedSlotId, setSelectedSlotId }: FormDateSectionProps): JSX.Element {
+function FormDateSection({ slots, day, register }: FormDateSectionProps): JSX.Element {
   return (
     <fieldset className="booking-form__date-section">
       <legend className="booking-form__date-title">{day}</legend>
@@ -23,9 +23,8 @@ function FormDateSection({ slots, day, selectedSlotId, setSelectedSlotId }: Form
               key={slotId}
               time={slot.time}
               isAvailable={slot.isAvailable}
-              isChecked={selectedSlotId === slotId}
-              onChange={() => setSelectedSlotId(slotId)}
               slotId={slotId}
+              register={register}
             />
           );
         })}

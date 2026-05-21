@@ -1,17 +1,18 @@
+import { UseFormRegister } from 'react-hook-form';
+import { BookingFormData } from '../../../types/booking-data';
+
 type FormSlotProps = {
   time: string;
   isAvailable: boolean;
-  isChecked: boolean;
-  onChange: () => void;
   slotId: string;
+  register: UseFormRegister<BookingFormData>;
 };
 
 function FormSlot({
   time,
   isAvailable,
-  isChecked,
-  onChange,
   slotId,
+  register,
 }: FormSlotProps): JSX.Element {
 
   return (
@@ -19,12 +20,11 @@ function FormSlot({
       <input
         type="radio"
         id={slotId}
-        name="date"
-        required
         value={slotId}
-        checked={isChecked}
-        onChange={onChange}
         disabled={!isAvailable}
+        {...register('slotId', {
+          required: 'Выберите дату и время',
+        })}
       />
       <span className="custom-radio__label">{time}</span>
     </label>

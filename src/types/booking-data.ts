@@ -8,6 +8,15 @@ type BookingData = {
   placeId: string;
 };
 
+type BookingFormData = {
+  slotId: string;
+  contactPerson: string;
+  phone: string;
+  peopleCount: number;
+  withChildren: boolean;
+  agreement: boolean;
+};
+
 type PostQuestBookingArg = {
   questId: string;
   bookingData: BookingData;
@@ -36,4 +45,4 @@ type ResponseBooking = {
   };
 };
 
-export type { BookingData, PostQuestBookingArg, ResponseBooking };
+export type { BookingData, BookingFormData, PostQuestBookingArg, ResponseBooking };
