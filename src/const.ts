@@ -9,9 +9,9 @@ export const AppRoute = {
 } as const;
 
 export const NavItems = [
-  { label: 'Квесты', to: AppRoute.MyQuests },
+  { label: 'Квесты', to: AppRoute.Root },
   { label: 'Контакты', to: AppRoute.Contacts },
-  { label: 'Мои бронирования', to: AppRoute.Booking },
+  { label: 'Мои бронирования', to: AppRoute.MyQuests },
 ] as const;
 
 export enum AuthorizationStatus {

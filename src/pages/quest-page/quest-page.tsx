@@ -6,6 +6,7 @@ import { AppRoute } from '../../const';
 import Spinner from '../../components/spinner/spinner';
 import { QuestTypeTitle } from '../../const';
 import { DifficultyTitle } from '../../const';
+import { Helmet } from 'react-helmet-async';
 
 
 function QuestPage(): JSX.Element | null {
@@ -35,6 +36,7 @@ function QuestPage(): JSX.Element | null {
 
   return (
     <main className="decorated-page quest-page">
+      <Helmet><title>Quest page</title></Helmet>
       <div className="decorated-page__decor" aria-hidden="true">
         <picture>
           <source

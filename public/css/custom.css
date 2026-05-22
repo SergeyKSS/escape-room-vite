@@ -1,0 +1,7 @@
+.form-error {
+  display: block;
+  margin-top: 4px;
+  color: #ff3b30;
+  font-size: 12px;
+  line-height: 16px;
+}

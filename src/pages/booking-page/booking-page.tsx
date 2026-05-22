@@ -13,6 +13,7 @@ import { BookingFormData } from '../../types/booking-data';
 import { postQuestBookingAction } from '../../store/api-actions';
 import { dayValue, formatSlotId } from '../../utils/utils';
 import { processErrorHandle } from '../../services/process-error-handle';
+import { Helmet } from 'react-helmet-async';
 
 function BookingPage(): JSX.Element | null {
   const { id } = useParams<{ id: string }>();
@@ -33,11 +34,13 @@ function BookingPage(): JSX.Element | null {
   const isBookingInfoLoading = useAppSelector(
     (state) => state.bookingInfo.isBookingInfoLoading,
   );
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<BookingFormData>({
+    mode: 'onChange',
     defaultValues: {
       withChildren: true,
     },
@@ -54,12 +57,6 @@ function BookingPage(): JSX.Element | null {
     setSelectedPlaceId('');
   }, [id]);
 
-  useEffect(() => {
-    if (bookingInfo.length > 0 && selectedPlaceId === '') {
-      setSelectedPlaceId(bookingInfo[0].id);
-    }
-  }, [bookingInfo, selectedPlaceId]);
-
   if (!id || isBookingInfoNotFound || isDetailedQuestNotFound) {
     return <Navigate to={AppRoute.NotFound} replace />;
   }
@@ -68,8 +65,10 @@ function BookingPage(): JSX.Element | null {
     return <Spinner />;
   }
 
+  const selectedPlaceIdOrFirst = selectedPlaceId || bookingInfo[0]?.id || '';
+
   const selectedPlace = bookingInfo.find(
-    (place) => place.id === selectedPlaceId,
+    (place) => place.id === selectedPlaceIdOrFirst,
   );
 
   const getSelectedSlot = (slotId: string) => {
@@ -141,13 +140,14 @@ function BookingPage(): JSX.Element | null {
 
   return (
     <main className="page-content decorated-page">
+      <Helmet><title>Booking page</title></Helmet>
       <BookingDecore />
 
       <div className="container container--size-s">
         <BookingHeader title={quest.title} />
         <BookingMap
           places={bookingInfo}
-          selectedPlaceId={selectedPlaceId}
+          selectedPlaceId={selectedPlaceIdOrFirst}
           onPlaceSelect={setSelectedPlaceId}
           address={selectedPlace?.location.address ?? ''}
         />
@@ -162,6 +162,7 @@ function BookingPage(): JSX.Element | null {
           }}
           minPeople={quest.peopleMinMax[0]}
           maxPeople={quest.peopleMinMax[1]}
+          isValid={isValid}
         />
       </div>
     </main>

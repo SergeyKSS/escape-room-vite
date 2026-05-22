@@ -7,6 +7,7 @@ import {
 } from '../../store/api-actions';
 import Spinner from '../../components/spinner/spinner';
 import { processErrorHandle } from '../../services/process-error-handle';
+import { Helmet } from 'react-helmet-async';
 
 function ReservationPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -42,6 +43,7 @@ function ReservationPage(): JSX.Element {
 
   return (
     <main className="page-content decorated-page">
+      <Helmet><title>Reservation page</title></Helmet>
       <div className="decorated-page__decor" aria-hidden="true">
         <picture>
           <source

@@ -9,6 +9,7 @@ import { setDifficulty, setTopic } from '../../store/quests/quests-slice';
 import { DifficultyId } from '../../types/difficulty';
 import { TopicId } from '../../types/topic';
 import { selectFilteredQuests } from '../../store/selectors';
+import { Helmet } from 'react-helmet-async';
 
 function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -29,6 +30,7 @@ function MainPage(): JSX.Element {
 
   return (
     <main className="page-content">
+      <Helmet><title>Main page</title></Helmet>
       <div className="container">
         <div className="page-content__title-wrapper">
           <h1 className="subtitle page-content__subtitle">

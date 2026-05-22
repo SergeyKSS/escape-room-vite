@@ -1,8 +1,10 @@
 import ContactsMapComponent from './contacts-map';
+import { Helmet } from 'react-helmet-async';
 
 function ContactsPage(): JSX.Element {
   return (
     <main className="page-content decorated-page">
+      <Helmet><title>Contacts page</title></Helmet>
       <div className="decorated-page__decor" aria-hidden="true">
         <picture>
           <source

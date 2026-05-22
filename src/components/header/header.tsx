@@ -2,6 +2,9 @@ import NavList from './nav-list';
 import { AuthorizationStatus } from '../../const';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { logoutAction } from '../../store/api-actions';
+import { processErrorHandle } from '../../services/process-error-handle';
 
 type HeaderProps = {
   isAuth: AuthorizationStatus;
@@ -9,13 +12,21 @@ type HeaderProps = {
 
 function Header({ isAuth }: HeaderProps): JSX.Element {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleLoginClick = () => {
     navigate(AppRoute.Login);
   };
 
   const handleLogoutClick = () => {
-    navigate(AppRoute.Root);
+    dispatch(logoutAction()).then((result) => {
+      if (logoutAction.fulfilled.match(result)) {
+        navigate(AppRoute.Root);
+      }
+      if (logoutAction.rejected.match(result)) {
+        processErrorHandle(dispatch, result.payload ?? 'Unknown error');
+      }
+    });
   };
 
   return (

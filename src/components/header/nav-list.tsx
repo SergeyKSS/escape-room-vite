@@ -7,7 +7,7 @@ type NavListProps = {
 
 function NavList({ isAuth }: NavListProps): JSX.Element {
   const filteredNavItems = NavItems.filter(
-    (item) => item.to !== AppRoute.Booking || isAuth === AuthorizationStatus.Auth
+    (item) => item.to !== AppRoute.MyQuests || isAuth === AuthorizationStatus.Auth
   );
 
   return (

@@ -30,6 +30,8 @@ const activeIcon = new Icon({
   iconAnchor: [11, 42],
 });
 
+const DEFAULT_CENTER: [number, number] = [59.968322, 30.317359];
+
 function BookingMap({
   places,
   selectedPlaceId,
@@ -39,10 +41,15 @@ function BookingMap({
   const selectedPlace = places.find((place) => place.id === selectedPlaceId);
   const firstPlace = places[0];
 
+  const center =
+    selectedPlace?.location.coords ??
+    firstPlace?.location.coords ??
+    DEFAULT_CENTER;
+
   const map = useMap({
     mapId: BOOKING_MAP_ID,
-    center: selectedPlace?.location.coords ?? firstPlace.location.coords,
-    zoom: 13,
+    center: center,
+    zoom: 11,
   });
 
   useEffect(() => {

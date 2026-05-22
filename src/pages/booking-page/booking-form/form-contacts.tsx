@@ -6,9 +6,16 @@ type FormContactsProps = {
   errors: FieldErrors<BookingFormData>;
   minPeople: number;
   maxPeople: number;
+  isValid: boolean;
 };
 
-function FormContacts({register, errors, minPeople, maxPeople}: FormContactsProps): JSX.Element {
+function FormContacts({
+  register,
+  errors,
+  minPeople,
+  maxPeople,
+  isValid,
+}: FormContactsProps): JSX.Element {
   return (
     <>
       <fieldset className="booking-form__section">
@@ -96,6 +103,7 @@ function FormContacts({register, errors, minPeople, maxPeople}: FormContactsProp
       <button
         className="btn btn--accent btn--cta booking-form__submit"
         type="submit"
+        disabled={!isValid}
       >
         Забронировать
       </button>
@@ -119,8 +127,8 @@ function FormContacts({register, errors, minPeople, maxPeople}: FormContactsProp
           </a>
           &nbsp;и пользовательским соглашением
         </span>
-        {errors.agreement && <span>{errors.agreement.message}</span>}
       </label>
+      {errors.agreement && <span>{errors.agreement.message}</span>}
     </>
   );
 }
