@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import leaflet, { Icon } from 'leaflet';
 import { useMap } from '../../hooks/use-map';
+import { BOOKING_MAP_ID } from '../../const';
 
 type Place = {
   id: string;
@@ -39,6 +40,7 @@ function BookingMap({
   const firstPlace = places[0];
 
   const map = useMap({
+    mapId: BOOKING_MAP_ID,
     center: selectedPlace?.location.coords ?? firstPlace.location.coords,
     zoom: 13,
   });
@@ -70,7 +72,7 @@ function BookingMap({
     <div className="page-content__item">
       <div className="booking-map">
         <div className="map">
-          <div id="map" className="map__container" />
+          <div id={BOOKING_MAP_ID} className="map__container" />
         </div>
         <p className="booking-map__address">
           Вы&nbsp;выбрали: {address}

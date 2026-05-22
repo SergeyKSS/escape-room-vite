@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import leaflet from 'leaflet';
 
 type UseMapProps = {
+  mapId: string;
   center: [number, number];
   zoom: number;
 };
 
-export function useMap({ center, zoom }: UseMapProps): leaflet.Map | null {
+export function useMap({ center, zoom, mapId }: UseMapProps): leaflet.Map | null {
   const mapRef = useRef<leaflet.Map | null>(null);
   const [map, setMap] = useState<leaflet.Map | null>(null);
 
@@ -16,7 +17,7 @@ export function useMap({ center, zoom }: UseMapProps): leaflet.Map | null {
     }
 
     const mapInstance = leaflet
-      .map('map')
+      .map(mapId)
       .setView(center, zoom);
 
     leaflet
@@ -30,7 +31,7 @@ export function useMap({ center, zoom }: UseMapProps): leaflet.Map | null {
 
     mapRef.current = mapInstance;
     setMap(mapInstance);
-  }, [center, zoom]);
+  }, [mapId, center, zoom]);
 
   return map;
 }

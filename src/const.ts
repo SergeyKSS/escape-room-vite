@@ -119,3 +119,12 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
 }
+
+export const ContactsMap = {
+  address: 'Санкт-Петербург, Набережная реки Карповки, 5П',
+  coords: [59.968322, 30.317359] as [number, number],
+  zoom: 16,
+} as const;
+
+export const BOOKING_MAP_ID = 'booking-map';
+export const CONTACTS_MAP_ID = 'contacts-map';

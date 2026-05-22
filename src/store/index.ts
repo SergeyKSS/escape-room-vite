@@ -5,7 +5,7 @@ import { errorReducer } from './error/error-slice';
 import { userReducer } from './user/user-slice';
 import { detailedQuestReducer } from './detailed-quest/detailed-quest-slice';
 import { bookingInfoSliceReducer } from './booking-info/booking-info-slice';
-import { reservationInfoReducer } from './booking-reservation/booking-reservation';
+import { reservationInfoReducer } from './booking-reservation/booking-reservation-slice';
 
 export const rootReducer = combineReducers({
   quests: questsReducer,
