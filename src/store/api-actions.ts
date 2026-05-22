@@ -129,3 +129,36 @@ export const postQuestBookingAction = createAsyncThunk<ResponseBooking, PostQues
     }
   }
 );
+
+export const fetchUserReservationAction = createAsyncThunk<ResponseBooking[], void, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+  rejectValue: string;
+}>(
+  'fetch/userReservation',
+  async (_arg, {extra: api, rejectWithValue}) => {
+    try {
+      const {data} = await api.get<ResponseBooking[]>(APIRoute.Reservation);
+      return data;
+    } catch {
+      return rejectWithValue('Failed to fetch user reservations');
+    }
+  }
+);
+
+export const deleteUserReservationAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+  rejectValue: string;
+}>(
+  'delete/userReservation',
+  async (reservationId, {extra: api, rejectWithValue}) => {
+    try {
+      await api.delete(`${APIRoute.Reservation}/${reservationId}`);
+    } catch {
+      return rejectWithValue('Failed to delete user reservation');
+    }
+  }
+);
