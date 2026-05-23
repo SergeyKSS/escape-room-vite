@@ -1,12 +1,12 @@
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { BookingFormData } from '../../../types/booking-data';
+import { useAppSelector } from '../../../hooks';
 
 type FormContactsProps = {
   register: UseFormRegister<BookingFormData>;
   errors: FieldErrors<BookingFormData>;
   minPeople: number;
   maxPeople: number;
-  isValid: boolean;
 };
 
 function FormContacts({
@@ -14,8 +14,9 @@ function FormContacts({
   errors,
   minPeople,
   maxPeople,
-  isValid,
 }: FormContactsProps): JSX.Element {
+  const isPostLoading = useAppSelector((store) => store.postBooking.isPostQuestLoading);
+
   return (
     <>
       <fieldset className="booking-form__section">
@@ -40,7 +41,7 @@ function FormContacts({
               }
             })}
           />
-          {errors.contactPerson && <span>{errors.contactPerson.message}</span>}
+          {errors.contactPerson && <span className='form-error'>{errors.contactPerson.message}</span>}
         </div>
         <div className="custom-input booking-form__input">
           <label className="custom-input__label" htmlFor="tel">
@@ -58,7 +59,7 @@ function FormContacts({
               },
             })}
           />
-          {errors.phone && <span>{errors.phone.message}</span>}
+          {errors.phone && <span className='form-error'>{errors.phone.message}</span>}
         </div>
         <div className="custom-input booking-form__input">
           <label className="custom-input__label" htmlFor="person">
@@ -81,13 +82,12 @@ function FormContacts({
               },
             })}
           />
-          {errors.peopleCount && <span>{errors.peopleCount.message}</span>}
+          {errors.peopleCount && <span className='form-error'>{errors.peopleCount.message}</span>}
         </div>
         <label className="custom-checkbox booking-form__checkbox booking-form__checkbox--children">
           <input
             type="checkbox"
             id="children"
-            defaultChecked
             {...register('withChildren')}
           />
           <span className="custom-checkbox__icon">
@@ -103,7 +103,7 @@ function FormContacts({
       <button
         className="btn btn--accent btn--cta booking-form__submit"
         type="submit"
-        disabled={!isValid}
+        disabled={isPostLoading}
       >
         Забронировать
       </button>
@@ -128,7 +128,7 @@ function FormContacts({
           &nbsp;и пользовательским соглашением
         </span>
       </label>
-      {errors.agreement && <span>{errors.agreement.message}</span>}
+      {errors.agreement && <span className='form-error'>{errors.agreement.message}</span>}
     </>
   );
 }

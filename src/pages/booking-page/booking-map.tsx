@@ -38,8 +38,11 @@ function BookingMap({
   onPlaceSelect,
   address,
 }: BookingMapProps): JSX.Element {
-  const selectedPlace = places.find((place) => place.id === selectedPlaceId);
   const firstPlace = places[0];
+  const actualSelectedPlaceId = selectedPlaceId || firstPlace?.id || '';
+  const selectedPlace = places.find(
+    (place) => place.id === actualSelectedPlaceId,
+  );
 
   const center =
     selectedPlace?.location.coords ??
@@ -53,11 +56,23 @@ function BookingMap({
   });
 
   useEffect(() => {
+    if (!map) {
+      return;
+    }
+
+    map.setView(center, 11);
+  }, [map, center]);
+
+  useEffect(() => {
     if (!map || places.length === 0) {
       return;
     }
 
     const markerLayer = leaflet.layerGroup().addTo(map);
+
+    const bounds = leaflet.latLngBounds(
+      places.map((place) => place.location.coords),
+    );
 
     places.forEach((place) => {
       leaflet
@@ -70,6 +85,14 @@ function BookingMap({
         });
     });
 
+    if (places.length === 1) {
+      map.setView(places[0].location.coords, 13);
+    } else {
+      map.fitBounds(bounds, {
+        padding: [50, 50],
+      });
+    }
+
     return () => {
       markerLayer.remove();
     };
@@ -81,9 +104,7 @@ function BookingMap({
         <div className="map">
           <div id={BOOKING_MAP_ID} className="map__container" />
         </div>
-        <p className="booking-map__address">
-          Вы&nbsp;выбрали: {address}
-        </p>
+        <p className="booking-map__address">Вы&nbsp;выбрали: {address}</p>
       </div>
     </div>
   );

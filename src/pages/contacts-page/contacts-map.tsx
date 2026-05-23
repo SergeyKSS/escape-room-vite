@@ -5,7 +5,7 @@ import { ContactsMap } from '../../const';
 import { CONTACTS_MAP_ID } from '../../const';
 
 const defaultIcon = new Icon({
-  iconUrl: '/img/svg/pin-default.svg',
+  iconUrl: '/img/svg/pin-active.svg',
   iconSize: [23, 42],
   iconAnchor: [11, 42],
 });

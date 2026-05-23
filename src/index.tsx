@@ -8,7 +8,7 @@ import { checkAuthAction } from './store/api-actions';
 import HistoryRouter from './components/history-router/history-router';
 import browserHistory from './utils/browser-history';
 import App from './components/app/app';
-import '../public/css/custom.css';
+import './custom.css';
 
 store.dispatch(checkAuthAction());
 

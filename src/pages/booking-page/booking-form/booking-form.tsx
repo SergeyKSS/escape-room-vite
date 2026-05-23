@@ -12,7 +12,6 @@ type BookingFormProps = {
   onSubmit: (evt: React.FormEvent<HTMLFormElement>) => void;
   minPeople: number;
   maxPeople: number;
-  isValid: boolean;
 };
 
 function BookingForm({
@@ -23,7 +22,6 @@ function BookingForm({
   onSubmit,
   minPeople,
   maxPeople,
-  isValid,
 }: BookingFormProps): JSX.Element {
   return (
     <form
@@ -44,7 +42,7 @@ function BookingForm({
           day={'Завтра'}
           register={register}
         />
-        {errors.slotId && <span>{errors.slotId.message}</span>}
+        {errors.slotId && <span className='form-error'>{errors.slotId.message}</span>}
       </fieldset>
 
       <FormContacts
@@ -52,7 +50,6 @@ function BookingForm({
         errors={errors}
         minPeople={minPeople}
         maxPeople={maxPeople}
-        isValid={isValid}
       />
     </form>
   );

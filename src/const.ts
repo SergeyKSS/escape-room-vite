@@ -42,7 +42,7 @@ export const FilterData = [
     title: 'Все квесты',
   },
   {
-    id: 'adventure',
+    id: 'adventures',
     width: '36',
     height: '30',
     href: '#icon-adventure',
@@ -70,7 +70,7 @@ export const FilterData = [
     title: 'Детектив',
   },
   {
-    id: 'sciFi',
+    id: 'sci-fi',
     width: '28',
     height: '30',
     href: '#icon-sci-fi',
@@ -88,7 +88,7 @@ export const DifficultyData = [
     title: 'Лёгкий',
   },
   {
-    id: 'middle',
+    id: 'medium',
     title: 'Средний',
   },
   {

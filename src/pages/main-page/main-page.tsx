@@ -10,15 +10,22 @@ import { DifficultyId } from '../../types/difficulty';
 import { TopicId } from '../../types/topic';
 import { selectFilteredQuests } from '../../store/selectors';
 import { Helmet } from 'react-helmet-async';
+import { QuestTypeTitle, DifficultyTitle } from '../../const';
 
 function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const activeFilter = useAppSelector((state) => state.quests.questsTopic);
-  const activeDifficulty = useAppSelector((state) => state.quests.questsDifficulty);
+  const activeDifficulty = useAppSelector(
+    (state) => state.quests.questsDifficulty,
+  );
 
   const handleFilterChange = (id: TopicId) => dispatch(setTopic(id));
-  const handleDifficultyChange = (id: DifficultyId) => dispatch(setDifficulty(id));
-  const filteredQuests = useAppSelector(selectFilteredQuests);
+  const handleDifficultyChange = (id: DifficultyId) =>
+    dispatch(setDifficulty(id));
+  const filteredQuests = useAppSelector((state) => selectFilteredQuests(state));
+
+  const topicTitle = activeFilter === 'all' ? 'Все квесты' : QuestTypeTitle[activeFilter];
+  const difficultTitle = activeDifficulty === 'any' ? 'Любая сложность' : DifficultyTitle[activeDifficulty];
 
   useEffect(() => {
     dispatch(fetchQuestsAction()).then((result) => {
@@ -30,7 +37,9 @@ function MainPage(): JSX.Element {
 
   return (
     <main className="page-content">
-      <Helmet><title>Main page</title></Helmet>
+      <Helmet>
+        <title>Main page</title>
+      </Helmet>
       <div className="container">
         <div className="page-content__title-wrapper">
           <h1 className="subtitle page-content__subtitle">
@@ -44,16 +53,27 @@ function MainPage(): JSX.Element {
           <form className="filter" action="#" method="get">
             <fieldset className="filter__section">
               <legend className="visually-hidden">Тематика</legend>
-              <FilterTopic activeFilter={activeFilter} onFilterChange={handleFilterChange}/>
+              <FilterTopic
+                activeFilter={activeFilter}
+                onFilterChange={handleFilterChange}
+              />
             </fieldset>
             <fieldset className="filter__section">
               <legend className="visually-hidden">Сложность</legend>
-              <FilterDifficulty activeDifficulty={activeDifficulty} onDifficultyChange={handleDifficultyChange}/>
+              <FilterDifficulty
+                activeDifficulty={activeDifficulty}
+                onDifficultyChange={handleDifficultyChange}
+              />
             </fieldset>
           </form>
         </div>
         <h2 className="title visually-hidden">Выберите квест</h2>
-        <CardsGrid cards={filteredQuests}/>
+        {filteredQuests.length === 0 && (
+          <p className='filterTitle'>
+            Не найдено совпадений выбранного типа - {topicTitle.toUpperCase()} и уровня сложности - {difficultTitle.toUpperCase()}
+          </p>
+        )}
+        <CardsGrid cards={filteredQuests} />
       </div>
     </main>
   );

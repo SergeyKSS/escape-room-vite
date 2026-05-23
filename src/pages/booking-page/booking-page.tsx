@@ -38,7 +38,7 @@ function BookingPage(): JSX.Element | null {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<BookingFormData>({
     mode: 'onChange',
     defaultValues: {
@@ -145,12 +145,15 @@ function BookingPage(): JSX.Element | null {
 
       <div className="container container--size-s">
         <BookingHeader title={quest.title} />
-        <BookingMap
-          places={bookingInfo}
-          selectedPlaceId={selectedPlaceIdOrFirst}
-          onPlaceSelect={setSelectedPlaceId}
-          address={selectedPlace?.location.address ?? ''}
-        />
+
+        {bookingInfo.length > 0 && (
+          <BookingMap
+            places={bookingInfo}
+            selectedPlaceId={selectedPlaceIdOrFirst}
+            onPlaceSelect={setSelectedPlaceId}
+            address={selectedPlace?.location.address ?? ''}
+          />
+        )}
 
         <BookingForm
           todaySlots={selectedPlace?.slots.today ?? []}
@@ -162,7 +165,6 @@ function BookingPage(): JSX.Element | null {
           }}
           minPeople={quest.peopleMinMax[0]}
           maxPeople={quest.peopleMinMax[1]}
-          isValid={isValid}
         />
       </div>
     </main>

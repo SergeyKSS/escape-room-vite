@@ -5,3 +5,9 @@
   font-size: 12px;
   line-height: 16px;
 }
+
+.filterTitle {
+  margin-top: 100px;
+  text-align: center;
+  font-size: large;
+}
